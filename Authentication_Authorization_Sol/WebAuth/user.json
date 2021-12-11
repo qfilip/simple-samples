@@ -1,0 +1,14 @@
+[{
+        "Username": "Alice",
+        "Email": "alice@notmail.com",
+        "Role": "User"
+    }, {
+        "Username": "Bob",
+        "Email": "bob@notmail.com",
+        "Role": "User"
+    }, {
+        "Username": "Carl",
+        "Email": "carl@notmail.com",
+        "Role": "Admin"
+    }
+]

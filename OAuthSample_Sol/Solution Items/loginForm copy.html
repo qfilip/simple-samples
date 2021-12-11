@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Form</title>
+</head>
+<body>
+    <fieldset style="margin: 30px auto; width: 50%;">
+        <legend>Info Corp</legend>
+        <div>
+            <label>User</label>
+            <input id="uname" type="text" value="Nebuchadnezzar" disabled />
+            <input id="redirectUri" type="text" value="{_redirectUri}" hidden />
+            <input id="state" type="text" value="{_state}" hidden />
+            <button onclick="login()">Login</button>
+        </div>
+    </fieldset>
+
+    <script>
+        async function postData(url = '', data) {
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data)
+            });
+            // return response.json();
+            return response;
+        }
+        
+        function login() {
+            const byId = (id) => document.getElementById(id).value;
+            let authModel = {
+                name: byId('uname'),
+                redirectUri: byId('redirectUri'),
+                state: byId('state')
+            };
+
+            postData('https://localhost:44355/oauth/authorize', authModel)
+            .then(data => console.log('cool'))
+            .catch(err => console.log(err));
+        }
+    </script>
+</body>
+</html>

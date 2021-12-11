@@ -1,0 +1,46 @@
+﻿@page
+@model Server.Pages.AuthenticateModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Form</title>
+</head>
+<body>
+    <fieldset style="margin: 30px auto; width: 50%;">
+        <legend>Info Corp</legend>
+        <div>
+            <label>User</label>
+            <input id="uname" type="text" value="Nebuchadnezzar" disabled />
+            <input id="redirectUri" type="text" value="{_redirectUri}" hidden />
+            <input id="state" type="text" value="{_state}" hidden />
+            <button onclick="login()">Login</button>
+        </div>
+    </fieldset>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js' integrity='sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw==' crossorigin='anonymous'></script>
+    <script>
+        var authUri = 'https://localhost:44355/oauth/authorize';
+        
+        function login() {
+            const byId = (id) => document.getElementById(id).value;
+            let authModel = {
+                name: byId('uname'),
+                redirectUri: byId('redirectUri'),
+                state: byId('state')
+            };
+
+            axios.post(authUri, authModel)
+            .then(res => {
+                console.log(res);
+                axios.get(res.data)
+                .then(res => { console.log(res); window.close(); })
+                .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+        }
+    </script>
+</body>
+</html>

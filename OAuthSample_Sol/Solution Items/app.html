@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Login via oauth</legend>
+        <button onclick="grantAccess()">Grant access</button>
+    </fieldset>
+
+    <iframe id="ifr" width="500" height="300"></iframe>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
+    <script>
+        function grantAccess() {
+            console.log('clicked')
+            $.ajax({
+                url: 'https://localhost:44311/oauth/grantaccess',
+                method: 'GET',
+                success: (x) => {
+                    console.log(x);
+                    // let np = window.open();
+                    // console.log(np.document)
+                    // np.document.open();
+                    // np.document.write(x);
+                    // np.document.close();
+                    let ifr = document.getElementById('ifr');
+                    ifr.src = "data:text/html;charset=utf-8," + x;
+                },
+                error: (x) => console.log(x)
+            });
+        }
+    </script>
+</body>
+</html>

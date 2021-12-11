@@ -1,0 +1,20 @@
+<fieldset>
+    <legend>Dynamic Rendering</legend>
+    <div>Useful for creating your own notifications</div>
+</fieldset>
+<hr>
+
+<div #notificationContainer class="noselect notification-container"></div>
+
+<div>
+    <button (click)="notify(_notificationType.Success)">Notify Success</button>
+</div>
+<div>
+    <button (click)="notify(_notificationType.Info)">Notify Info</button>
+</div>
+<div>
+    <button (click)="notify(_notificationType.Warning)">Notify Warning</button>
+</div>
+<div>
+    <button (click)="notify(_notificationType.Error)">Notify Error</button>
+</div>

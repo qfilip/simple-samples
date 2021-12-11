@@ -1,0 +1,14 @@
+<div *ngFor="let link of navLinks">
+    <div class="nav-link"
+        (click)="navigateTo(link.path)"
+        (mouseover)="displayLinkText(link.text)"
+        (mouseout)="hideLinkText()"
+        [innerHTML]="link.icon">
+        <i class="las la-list-ul"></i>
+    </div>
+</div>
+<div [ngClass]="!!linkText ? 'visible' : 'hidden'" class="nav-text">
+    {{ linkText }}
+</div>
+
+<router-outlet></router-outlet>
